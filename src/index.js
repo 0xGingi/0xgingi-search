@@ -23,7 +23,7 @@ async function generateHash(message){
 }
 
 async function setValue(key, value, expirationTime = null, cacheTime = 60){
-	let cacheKey = "https://api.rabbitsearch.org?key=" + key;
+	let cacheKey = "https://api.0xgingi.com?key=" + key;
 	if(expirationTime === null){
 		await env.KV.put(key, value);
 	}else{
@@ -37,7 +37,7 @@ async function setValue(key, value, expirationTime = null, cacheTime = 60){
 async function getValue(key, cacheTime = 60){
 	let value = null;
 
-	let cacheKey = "https://api.rabbitsearch.org?key=" + key;
+	let cacheKey = "https://api.0xgingi?key=" + key;
 	let res = await cache.match(cacheKey);
 	if(res) value = await res.text();
 
@@ -53,7 +53,7 @@ async function getValue(key, cacheTime = 60){
 
 async function deleteValue(key){
 	await env.KV.delete(key);
-	await cache.delete("https://api.rabbitsearch.org?key=" + key);
+	await cache.delete("https://api.0xgingi.com?key=" + key);
 }
 
 async function search(query, type = 'general'){
@@ -74,7 +74,7 @@ async function search(query, type = 'general'){
 }
 
 router.use('*', cors({
-    origin: ['https://rabbitsearch.org', 'https://rabbitsearch.net', 'https://dev.rabbitsearch.org', 'https://dev.rabbitsearch.net'],
+    origin: ['https://brave.0xgingi.com'],
     allowHeaders: ['*'],
     allowMethods: ['POST', 'GET', 'OPTIONS'],
     maxAge: 86400,
